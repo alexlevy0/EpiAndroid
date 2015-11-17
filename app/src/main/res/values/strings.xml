@@ -8,5 +8,11 @@
     <string name="login_hint">Epitech Login</string>
     <string name="pwd_hint">UNIX Password</string>
     <string name="login">Viens on est bien !</string>
-    <string name="url_api">https://epitech-api.herokuapp.com</string>
+
+    <string name="url_api">intra.epitech.eu</string>
+
+    <string name="home">MainActivity</string>
+
+    <string name="loginButton">MainActivity</string>
+
 </resources>

@@ -33,7 +33,7 @@ public class LoginActivity extends Activity {
     private JsonObjectRequest request;
 
     @Override
-    public void onCreate(Bundle bundle){
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
         try {
@@ -43,7 +43,7 @@ public class LoginActivity extends Activity {
         }
     }
 
-    private boolean setLoginView(){
+    private boolean setLoginView() {
         setContentView(R.layout.activity_login);
 
         username = (EditText) findViewById(R.id.usernameText);
@@ -55,38 +55,39 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
                 String userName = username.getText().toString();
                 String userPwd = password.getText().toString();
-                if (userName == null || userName.isEmpty() || userPwd == null || userPwd.isEmpty()) {
+                Toast.makeText(LoginActivity.this, "Ca vient, ca vient...", Toast.LENGTH_LONG).show();
+
+                if (userName.isEmpty() || userPwd.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Verifier les champs login/password", Toast.LENGTH_LONG).show();
                     return;
                 }
-
-                Toast.makeText(LoginActivity.this, "Ca vient, ca vient...", Toast.LENGTH_LONG).show();
                 try {
                     final JSONObject jsonBody = new JSONObject();
                     jsonBody.put("login", userName);
                     jsonBody.put("password", userPwd);
 
-//                Uri.Builder builder = new Uri.Builder();
-//                builder.scheme("https").authority(getString(R.string.url_api))
-//                        .appendPath("login");
-                    request = new JsonObjectRequest(Request.Method.POST, "https://epitech-api.herokuapp.com/login", jsonBody, new Response.Listener<JSONObject>() {
+                Uri.Builder builder = new Uri.Builder();
+                builder.scheme("https").authority(getString(R.string.url_api))
+                        .appendPath("login").appendQueryParameter("format", "json");
+                    request = new JsonObjectRequest(Request.Method.POST, builder.build().toString(), jsonBody,
+                            new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            launchApp(response);
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e("ERROR LOGIN", error.getMessage());
-                            error.printStackTrace();
-                        }
-                    });
+                                launchApp(response);
+                                VolleyLog.v("Response:%n %s", response.toString());
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("ERROR LOGIN", error.getMessage());
+                                error.printStackTrace();
+                            }
+                        });
 
                     NetworkSingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
 
                 } catch (JSONException e){
-                    Log.e("MYAPP", "unexpected JSON exception", e);
-                    // Do something to recover ... or kill the app.
+                    Log.d("MYAPP", "unexpected JSON exception", e);
                 }
             }
         });
@@ -94,16 +95,15 @@ public class LoginActivity extends Activity {
     }
 
     private void launchApp(JSONObject response) {
-        Intent intent = new Intent(this, MainActivity.class);
-
         try {
-            String token = response.getString("token");
+            final String token = response.getString("access_token");
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.putExtra("token", token);
-            Log.d("TOKEN", token);
+            startActivity(intent);
+            finish();
         } catch (JSONException e) {
-            //TODO
+            e.printStackTrace();
         }
-        startActivity(intent);
-        finish();
     }
+
 }
