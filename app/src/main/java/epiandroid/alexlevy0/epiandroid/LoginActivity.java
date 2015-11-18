@@ -22,9 +22,6 @@ import org.json.JSONObject;
 
 import epiandroid.alexlevy0.epiandroid.utils.NetworkSingleton;
 
-/**
- * Created by alexl on 16/11/2015.
- */
 public class LoginActivity extends Activity {
 
     private EditText username;
@@ -36,11 +33,24 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
+        String test = "{\n" +
+                "                \"login\": \"levy_b\",\n" +
+                "                \"message\": \"Succès\",\n" +
+                "                \"access_token\": \"W5sfi0<b\"\n" +
+                "        }";
         try {
-            setLoginView();
-        } catch (Exception e){
-            Log.e("SetLoginView ERROR", e.getMessage(), e);
+            JSONObject object = new JSONObject(test);
+            launchApp(object);
+        } catch (JSONException e) {
+            //TODO
         }
+
+//
+//        try {
+//            setLoginView();
+//        } catch (Exception e){
+//            Log.e("SetLoginView ERROR", e.getMessage(), e);
+//        }
     }
 
     private boolean setLoginView() {
@@ -107,5 +117,4 @@ public class LoginActivity extends Activity {
             e.printStackTrace();
         }
     }
-
 }

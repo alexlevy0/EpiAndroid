@@ -1,20 +1,15 @@
 <resources>
     <string name="app_name">EpiAndroid</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">KESTA ? CLICK PAS ICI !</string>
     <string name="login_hint">Epitech Login</string>
     <string name="pwd_hint">UNIX Password</string>
     <string name="login">Viens on est bien !</string>
-
     <string name="url_api">intra.epitech.eu</string>
-
-    <string name="url_profilPicture">cdn.local.epitech.eu/userprofil/</string>
-
+    <string name="url_profilPicture">cdn.local.epitech.eu</string>
     <string name="home">MainActivity</string>
-
     <string name="loginButton">MainActivity</string>
+    <string name="mailEpitech">\@epitech.eu</string>
 
 </resources>

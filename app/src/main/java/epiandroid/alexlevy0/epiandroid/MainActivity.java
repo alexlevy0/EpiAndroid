@@ -1,11 +1,14 @@
 package epiandroid.alexlevy0.epiandroid;
 
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,25 +21,42 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.NetworkImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import epiandroid.alexlevy0.epiandroid.fragments.LogFragment;
+import epiandroid.alexlevy0.epiandroid.fragments.MessageFragment;
 import epiandroid.alexlevy0.epiandroid.utils.NetworkSingleton;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ImageView profilPicture;
-    private String login;
+    private NetworkImageView profilPicture;
+    private String           login;
+    private ImageLoader      mImageLoader;
+    private TextView         profileName;
+    private TextView         profileMail;
+
+    private Fragment         logFragment;
+    private Fragment         messageFragment;
+    private Fragment         planningFragment;
+    private Fragment         tokenFragment;
+    private Fragment         trombiFragment;
+    private Fragment         modulesFragment;
+    private Fragment         logoutFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,29 +86,28 @@ public class MainActivity extends AppCompatActivity
         if (!getIntent().hasExtra("login"))
             Toast.makeText(MainActivity.this, "Impossible de trouver le login", Toast.LENGTH_LONG).show();
         login = getIntent().getStringExtra("login");
+
+        View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        profileName = (TextView) header.findViewById(R.id.profileName);
+        profileName.setText(login);
+        profileMail = (TextView) header.findViewById(R.id.profileMail);
+        profileMail.setText(login + getString(R.string.mailEpitech));
+
+        profilPicture = (NetworkImageView) header.findViewById(R.id.profilPictureNav);
         getProfilPicture(login);
-        profilPicture = (ImageView) findViewById(R.id.profilPicture);
+
+        messageFragment = new MessageFragment();
+        logFragment = new LogFragment();
     }
 
     public boolean getProfilPicture(String login)
     {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https").authority(getString(R.string.url_profilPicture))
-                .appendPath(login);
-        ImageRequest imageRequest = new ImageRequest(builder.build().toString(), new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                profilPicture.setImageBitmap(response);
-            }
-        }, 100, 100, Bitmap.Config.ALPHA_8, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //TODO
-                Toast.makeText(MainActivity.this, "Impossible de Get le profilePicture", Toast.LENGTH_LONG).show();
-//                profilPicture.setImageResource(R.drawable.image_load_error);
-            }
-        });
-        NetworkSingleton.getInstance(this).addToRequestQueue(imageRequest);
+                .appendPath("userprofil").appendPath(login + ".bmp");
+        Log.d("IMAGE PROFILE", builder.build().toString());
+        mImageLoader = NetworkSingleton.getInstance(this).getImageLoader();
+        profilPicture.setImageUrl(builder.build().toString(), mImageLoader);
         return true;
     }
 
@@ -104,7 +123,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -124,26 +142,30 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (id) {
+            case R.id.log:
+                getSupportFragmentManager().beginTransaction().replace(R.id.Frame, logFragment).commit();
+                break;
+            case R.id.messages:
+                getSupportFragmentManager().beginTransaction().replace(R.id.Frame, messageFragment).commit();
+                break;
+            case R.id.planning:
+                break;
+            case R.id.token:
+                break;
+            case R.id.trombi:
+                break;
+            case R.id.modules:
+                break;
+            case R.id.projets:
+                break;
+            case R.id.logout:
+                break;
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

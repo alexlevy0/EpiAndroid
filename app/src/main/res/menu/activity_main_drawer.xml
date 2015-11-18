@@ -2,22 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
-            android:title="Import" />
-        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools" />
+        <item android:id="@+id/log" android:icon="@android:drawable/ic_menu_camera"
+            android:title="Log time" />
+        <item android:id="@+id/messages" android:icon="@android:drawable/ic_menu_gallery"
+            android:title="Messages" />
+        <item android:id="@+id/planning" android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="Planning" />
+        <item android:id="@+id/token" android:icon="@android:drawable/ic_menu_manage"
+            android:title="Token" />
+        <item android:id="@+id/trombi" android:icon="@android:drawable/ic_menu_manage"
+            android:title="Trombi" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Registration">
         <menu>
-            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
-                android:title="Share" />
-            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
-                android:title="Send" />
+            <item android:id="@+id/modules" android:icon="@android:drawable/ic_menu_share"
+                android:title="modules" />
+            <item android:id="@+id/projets" android:icon="@android:drawable/ic_menu_send"
+                android:title="Projects" />
+            <item android:id="@+id/logout" android:icon="@android:drawable/ic_menu_manage"
+                android:title="logout" />
         </menu>
     </item>
 
