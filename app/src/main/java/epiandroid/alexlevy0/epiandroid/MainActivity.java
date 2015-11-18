@@ -1,8 +1,12 @@
 package epiandroid.alexlevy0.epiandroid;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +16,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import epiandroid.alexlevy0.epiandroid.utils.NetworkSingleton;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ImageView profilPicture;
+    private String login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +62,34 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (!getIntent().hasExtra("login"))
+            Toast.makeText(MainActivity.this, "Impossible de trouver le login", Toast.LENGTH_LONG).show();
+        login = getIntent().getStringExtra("login");
+        getProfilPicture(login);
+        profilPicture = (ImageView) findViewById(R.id.profilPicture);
+    }
+
+    public boolean getProfilPicture(String login)
+    {
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("https").authority(getString(R.string.url_profilPicture))
+                .appendPath(login);
+        ImageRequest imageRequest = new ImageRequest(builder.build().toString(), new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                profilPicture.setImageBitmap(response);
+            }
+        }, 100, 100, Bitmap.Config.ALPHA_8, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //TODO
+                Toast.makeText(MainActivity.this, "Impossible de Get le profilePicture", Toast.LENGTH_LONG).show();
+//                profilPicture.setImageResource(R.drawable.image_load_error);
+            }
+        });
+        NetworkSingleton.getInstance(this).addToRequestQueue(imageRequest);
+        return true;
     }
 
     @Override

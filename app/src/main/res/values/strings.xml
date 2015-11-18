@@ -11,6 +11,8 @@
 
     <string name="url_api">intra.epitech.eu</string>
 
+    <string name="url_profilPicture">cdn.local.epitech.eu/userprofil/</string>
+
     <string name="home">MainActivity</string>
 
     <string name="loginButton">MainActivity</string>

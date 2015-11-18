@@ -97,7 +97,9 @@ public class LoginActivity extends Activity {
     private void launchApp(JSONObject response) {
         try {
             final String token = response.getString("access_token");
+            final String login = response.getString("login");
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("login", login);
             intent.putExtra("token", token);
             startActivity(intent);
             finish();
