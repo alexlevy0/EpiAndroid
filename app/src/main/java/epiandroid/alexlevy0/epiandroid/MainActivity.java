@@ -38,6 +38,11 @@ import org.json.JSONObject;
 
 import epiandroid.alexlevy0.epiandroid.fragments.LogFragment;
 import epiandroid.alexlevy0.epiandroid.fragments.MessageFragment;
+import epiandroid.alexlevy0.epiandroid.fragments.ModulesFragment;
+import epiandroid.alexlevy0.epiandroid.fragments.PlanningFragment;
+import epiandroid.alexlevy0.epiandroid.fragments.ProjetsFragment;
+import epiandroid.alexlevy0.epiandroid.fragments.TokenFragment;
+import epiandroid.alexlevy0.epiandroid.fragments.TrombiFragment;
 import epiandroid.alexlevy0.epiandroid.utils.NetworkSingleton;
 
 public class MainActivity extends AppCompatActivity
@@ -55,8 +60,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment         tokenFragment;
     private Fragment         trombiFragment;
     private Fragment         modulesFragment;
-    private Fragment         logoutFragment;
-
+    private Fragment         projetsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,12 @@ public class MainActivity extends AppCompatActivity
 
         messageFragment = new MessageFragment();
         logFragment = new LogFragment();
+        modulesFragment = new ModulesFragment();
+        planningFragment = new PlanningFragment();
+        projetsFragment = new ProjetsFragment();
+        tokenFragment = new TokenFragment();
+        trombiFragment = new TrombiFragment();
+
     }
 
     public boolean getProfilPicture(String login)
@@ -154,16 +164,26 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame, messageFragment).commit();
                 break;
             case R.id.planning:
+                getSupportFragmentManager().beginTransaction().replace(R.id.Frame, planningFragment).commit();
                 break;
             case R.id.token:
+                getSupportFragmentManager().beginTransaction().replace(R.id.Frame, tokenFragment).commit();
                 break;
             case R.id.trombi:
+                getSupportFragmentManager().beginTransaction().replace(R.id.Frame, trombiFragment).commit();
                 break;
             case R.id.modules:
+                getSupportFragmentManager().beginTransaction().replace(R.id.Frame, modulesFragment).commit();
                 break;
             case R.id.projets:
+                getSupportFragmentManager().beginTransaction().replace(R.id.Frame, projetsFragment).commit();
                 break;
             case R.id.logout:
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.putExtra("login", "");
+                intent.putExtra("token", "");
+                startActivity(intent);
+                finish();
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
