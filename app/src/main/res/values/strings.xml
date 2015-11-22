@@ -12,4 +12,33 @@
     <string name="loginButton">MainActivity</string>
     <string name="mailEpitech">\@epitech.eu</string>
 
+    <string name="token">/token POST \n\n
+        "token":"42", \n
+        "scolaryear":2014,\n
+        "codemodule":"B-GPR-360-0",\n
+        "codeinstance":"PAR-6-1",\n
+        "codeacti":"acti-167486",\n
+        "codeevent":"event-177013"\n
+        "tokenvalidationcode":"00000000"\n
+    </string>
+
+    <string name="planning">/planning GET \n\n
+       "token":"42", \n
+        "start":"YYYY-MM-DD", \n
+        "end":"YYYY-MM-DD" \n
+    </string>
+
+    <string name="message">/messages GET \n\n
+       "token":"42", \n
+    </string>
+
+    <string name="projet">/project POST \n\n
+        "token":"42", \n
+        "scolaryear":2014, \n
+        "codemodule":"B-GPR-360-0",\n
+        "codeinstance":"PAR-6-1",\n
+        "codeacti":"acti-167486"\n
+    </string>
+
+
 </resources>

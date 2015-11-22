@@ -16,8 +16,7 @@
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/profilPictureNav"
         android:layout_width="80dp"
-        android:layout_height="70dp"
-        />
+        android:layout_height="70dp" />
 
 
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
