@@ -11,7 +11,7 @@
     <string name="home">MainActivity</string>
     <string name="loginButton">MainActivity</string>
     <string name="mailEpitech">\@epitech.eu</string>
-
+    <string name="url_api2">epitech-api.herokuapp.com</string>
     <string name="token">/token POST \n\n
         "token":"42", \n
         "scolaryear":2014,\n

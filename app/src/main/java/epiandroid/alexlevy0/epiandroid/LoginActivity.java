@@ -36,7 +36,7 @@ public class LoginActivity extends Activity {
         String test = "{\n" +
                 "                \"login\": \"levy_b\",\n" +
                 "                \"message\": \"Succès\",\n" +
-                "                \"access_token\": \"W5sfi0<b\"\n" +
+                "                \"access_token\": \"lubtp0i3p67pe9lp1p77bscdm0\"\n" +
                 "        }";
         try {
             JSONObject object = new JSONObject(test);

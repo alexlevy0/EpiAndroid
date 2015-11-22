@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity
     private ImageLoader      mImageLoader;
     private TextView         profileName;
     private TextView         profileMail;
-
     private Fragment         logFragment;
     private Fragment         messageFragment;
     private Fragment         planningFragment;
@@ -107,6 +106,12 @@ public class MainActivity extends AppCompatActivity
         projetsFragment = new ProjetsFragment();
         tokenFragment = new TokenFragment();
         trombiFragment = new TrombiFragment();
+
+//        Bundle bundle = new Bundle();
+//        bundle.putString("token", "From Activity");
+//// set Fragmentclass Arguments
+//        Fragmentclass fragobj = new Fragmentclass();
+//        fragobj.setArguments(bundle);
 
     }
 
@@ -173,6 +178,8 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame, trombiFragment).commit();
                 break;
             case R.id.modules:
+
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame, modulesFragment).commit();
                 break;
             case R.id.projets:
