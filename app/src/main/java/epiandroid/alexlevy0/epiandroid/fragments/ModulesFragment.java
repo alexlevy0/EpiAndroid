@@ -31,9 +31,7 @@ import epiandroid.alexlevy0.epiandroid.R;
 import epiandroid.alexlevy0.epiandroid.utils.NetworkSingleton;
 
 public class ModulesFragment extends ListFragment {
-
-
-    private JsonObjectRequest request;
+        private JsonObjectRequest request;
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        return inflater.inflate(R.layout.modules_fragment, container, false);
@@ -74,26 +72,27 @@ public class ModulesFragment extends ListFragment {
     }
 
     private void showResponse(JSONObject response) {
-        String[] values = new String[] {};
         try {
             final JSONObject obj = response;
             final JSONArray modules = obj.getJSONArray("modules");
             final int n = modules.length();
+            String[] values = new String[n];
             for (int i = 0; i < n; ++i) {
                 final JSONObject person = modules.getJSONObject(i);
                 Log.d("TITLE --->", person.getString("title"));
                 Log.d("YEAR --->", person.getString("scolaryear"));
                 Log.d("GRADE --->", person.getString("grade"));
-                values[i] += person.getString("title");
+                values[i] = person.getString("title");
                 //TODO
             }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_list_item_1, values);
+            setListAdapter(adapter);
         } catch (JSONException e) {
             Log.e("JSON ERROR", e.getMessage());
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, values);
-        setListAdapter(adapter);
+
     }
 
 
