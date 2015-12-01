@@ -178,8 +178,6 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame, trombiFragment).commit();
                 break;
             case R.id.modules:
-
-
                 getSupportFragmentManager().beginTransaction().replace(R.id.Frame, modulesFragment).commit();
                 break;
             case R.id.projets:

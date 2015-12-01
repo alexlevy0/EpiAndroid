@@ -32,10 +32,6 @@ import epiandroid.alexlevy0.epiandroid.utils.NetworkSingleton;
 
 public class ModulesFragment extends ListFragment {
         private JsonObjectRequest request;
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        return inflater.inflate(R.layout.modules_fragment, container, false);
-//    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -91,10 +87,7 @@ public class ModulesFragment extends ListFragment {
         } catch (JSONException e) {
             Log.e("JSON ERROR", e.getMessage());
         }
-
-
     }
-
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {

@@ -19,9 +19,7 @@ public class MessageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.message_fragment, container, false);
-
-
-
+        //TODO API Non Fonctionnel Pb formatage de la response faire a la main ?
     }
 
 
