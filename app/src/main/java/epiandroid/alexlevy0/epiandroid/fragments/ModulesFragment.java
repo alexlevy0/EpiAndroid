@@ -45,7 +45,8 @@ public class ModulesFragment extends ListFragment {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme("https").authority(getString(R.string.url_api2))
                     .appendPath("modules").appendQueryParameter("token", "lubtp0i3p67pe9lp1p77bscdm0");
-            request = new JsonObjectRequest(Request.Method.GET, builder.build().toString(), jsonBody,
+
+        request = new JsonObjectRequest(Request.Method.GET, builder.build().toString(), jsonBody,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -69,20 +70,18 @@ public class ModulesFragment extends ListFragment {
 
     private void showResponse(JSONObject response) {
         try {
-            final JSONObject obj = response;
-            final JSONArray modules = obj.getJSONArray("modules");
+            final JSONArray modules = response.getJSONArray("modules");
             final int n = modules.length();
             String[] values = new String[n];
             for (int i = 0; i < n; ++i) {
-                final JSONObject person = modules.getJSONObject(i);
-                Log.d("TITLE --->", person.getString("title"));
-                Log.d("YEAR --->", person.getString("scolaryear"));
-                Log.d("GRADE --->", person.getString("grade"));
-                values[i] = person.getString("title");
+                final JSONObject module = modules.getJSONObject(i);
+                Log.d("TITLE --->", module.getString("title"));
+                Log.d("YEAR --->", module.getString("scolaryear"));
+                Log.d("GRADE --->", module.getString("grade"));
+                values[i] = module.getString("title");
                 //TODO
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1, values);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, values);
             setListAdapter(adapter);
         } catch (JSONException e) {
             Log.e("JSON ERROR", e.getMessage());
@@ -91,6 +90,7 @@ public class ModulesFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+        Toast.makeText(getContext(), "Tu as clické ", Toast.LENGTH_LONG).show();
         // TODO implement some logic
     }
 
