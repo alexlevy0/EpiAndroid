@@ -17,7 +17,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     List<MyObject> list;
     */
 
-    private JSONObject jsonObject;
+    private JSONArray jsonArray;
 
     //ajouter un constructeur prenant en entrée une liste
     /*                  OLD ************************************************************
@@ -25,8 +25,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         this.list = list;
     }
     */
-    public MessageAdapter(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
+    public MessageAdapter(JSONArray jsonObject) {
+        this.jsonArray = jsonObject;
     }
 
     //cette fonction permet de créer les viewHolder
@@ -59,9 +59,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         }
         */
 
+       //final JSONArray messages = JSONArray.getJSONArray("modules");
+            //myViewHolder.bind(messages.getJSONObject(position));
+
+
         try {
-            final JSONArray messages = jsonObject.getJSONArray("modules");
-            myViewHolder.bind(messages.getJSONObject(position));
+            myViewHolder.bind(jsonArray.getJSONObject(position));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -70,13 +73,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     @Override
     public int getItemCount() {
         // return list.size(); OLD
-        try {
-            final JSONArray messages = jsonObject.getJSONArray("modules");
-            return messages.length();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return 0;
+        return jsonArray.length();
     }
 
 }

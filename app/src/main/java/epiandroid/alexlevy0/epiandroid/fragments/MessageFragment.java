@@ -14,8 +14,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class MessageFragment extends Fragment {
     private MessageAdapter mAdapter;
     private LinearLayoutManager layoutManager;
     private List<MyObject> cities;
-    private JsonObjectRequest request;
+    private JsonArrayRequest request;
 
     private void ajouterVilles() {
         cities = new ArrayList<>();
@@ -61,15 +63,15 @@ public class MessageFragment extends Fragment {
         Bundle args = getActivity().getIntent().getExtras();
         String token = args.getString("token");
 
-        final JSONObject jsonBody = new JSONObject();
+        final JSONArray jsonBody = new JSONArray();
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https").authority("epitech-api.herokuapp.com")
-                .appendPath("modules").appendQueryParameter("token", "lubtp0i3p67pe9lp1p77bscdm0");
-        request = new JsonObjectRequest(Request.Method.GET, builder.build().toString(), jsonBody,
-                new Response.Listener<JSONObject>() {
+                .appendPath("messages").appendQueryParameter("token", "lubtp0i3p67pe9lp1p77bscdm0");
+        request = new JsonArrayRequest(Request.Method.GET, builder.build().toString(), jsonBody,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("ERRROR---->", "CALLBACK DERREUR DE LA REQUET");
+                    public void onResponse(JSONArray response) {
+                        Log.d("SUCESS---->", "CALLBACK DE SUCESS DE LA REQUET");
                         VolleyLog.v("Response:%n %s", response.toString());
                         mAdapter = new MessageAdapter(response);
                         mRecyclerView.setAdapter(mAdapter);
