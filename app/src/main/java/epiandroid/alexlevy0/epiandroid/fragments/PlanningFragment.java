@@ -58,7 +58,7 @@ public class PlanningFragment extends ListFragment {
                 .appendPath("planning")
                 .appendQueryParameter("token", "q90psp6603krffartm2pa6cjb4")
                 .appendQueryParameter("start", dt)
-                .appendQueryParameter("end", "2015-11-29" /*output*/);
+                .appendQueryParameter("end", "2015-12-10" /*output*/);
         request = new JsonObjectRequest(Request.Method.GET, builder.build().toString(), jsonBody,
                 new Response.Listener<JSONObject>() {
             @Override
