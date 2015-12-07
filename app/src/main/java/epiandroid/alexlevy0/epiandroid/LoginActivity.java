@@ -89,7 +89,6 @@ public class LoginActivity extends Activity {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.e("ERROR LOGIN", error.getMessage());
                                 error.printStackTrace();
                             }
                         });

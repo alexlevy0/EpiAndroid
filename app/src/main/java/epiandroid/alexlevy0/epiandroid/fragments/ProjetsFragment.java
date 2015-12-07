@@ -56,40 +56,35 @@ public class ProjetsFragment extends ListFragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("JsonArrayRequest ---->", response.toString());
                         try {
                             final int n = response.length();
                             String[] values = new String[n];
                             for (int i = 0; i < response.length(); i++) {
+                                Log.d("1 ---->", Integer.toString(i));
                                 response.getString(i);
                                 JSONObject projet = new JSONObject(response.get(i).toString());
                                 String PROJET_NAME = projet.getString("project");
 
+                                Log.d("2 ---->", Integer.toString(i));
                                 //TODO SegV sur la liste
-                                if (!PROJET_NAME.equals("null") && response.get(i).toString() != null)
-                                    values[i] = PROJET_NAME;
-
-//                                String REGISTERED = projet.getString("registered");
-//                                if (REGISTERED.equals("1"))
-//                                    values[i] = PROJET_NAME;
+                                if (PROJET_NAME == null)
+                                    return;
+                                values[i] = PROJET_NAME;
+                                Log.d("3 ---->", Integer.toString(i));
                             }
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                                     android.R.layout.simple_list_item_1, values);
                             setListAdapter(adapter);
 
                         } catch (JSONException e) {
+                            Log.d("JsonArrayRequest ---->", response.toString());
                             e.printStackTrace();
-                            Toast.makeText(getActivity().getApplicationContext(),
-                                    "Error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
                         }
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        VolleyLog.d("PUTAIAN", "Error: " + error.getMessage());
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                error.getMessage(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
                     }
         });
         NetworkSingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(req);
