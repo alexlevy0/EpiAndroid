@@ -38,7 +38,7 @@ public class LogFragment extends Fragment {
         Uri.Builder builder = new Uri.Builder();
 
         builder.scheme("https").authority(getString(R.string.url_api2))
-                .appendPath("infos").appendQueryParameter("token", "lubtp0i3p67pe9lp1p77bscdm0");
+                .appendPath("infos").appendQueryParameter("token", token);
         request = new JsonObjectRequest(Request.Method.GET, builder.build().toString(), jsonBody,
                 new Response.Listener<JSONObject>() {
                     @Override
