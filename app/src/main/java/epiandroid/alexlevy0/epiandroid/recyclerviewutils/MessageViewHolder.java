@@ -19,7 +19,7 @@ import org.w3c.dom.Text;
 import epiandroid.alexlevy0.epiandroid.R;
 import epiandroid.alexlevy0.epiandroid.utils.NetworkSingleton;
 
-public class MessageViewHolder extends RecyclerView.ViewHolder{
+public class MessageViewHolder extends RecyclerView.ViewHolder {
 
     private TextView messageTitle;
     private TextView messageNameProfil;
@@ -60,6 +60,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder{
         try {
             messageTitle.setText(jsonObject.getString("title").replaceAll("\\<.*?>", ""));
             messageNameProfil.setText(jsonObject.getJSONObject("user").getString("title"));
+            Log.d("set text  --->", "" + jsonObject.getString("date"));
             messageTime.setText(jsonObject.getString("date"));
             messageContent.setText(jsonObject.getString("content").replaceAll("\\<.*?>", ""));
 

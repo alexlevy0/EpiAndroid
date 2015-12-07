@@ -8,10 +8,6 @@ import android.view.View;
 
 import epiandroid.alexlevy0.epiandroid.R;
 
-/**
- * Created by axel on 04/12/15.
- */
-
 public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
 

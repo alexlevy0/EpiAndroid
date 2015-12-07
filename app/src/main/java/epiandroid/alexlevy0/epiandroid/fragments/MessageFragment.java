@@ -29,37 +29,23 @@ import epiandroid.alexlevy0.epiandroid.recyclerviewutils.MyObject;
 import epiandroid.alexlevy0.epiandroid.recyclerviewutils.SimpleDividerItemDecoration;
 import epiandroid.alexlevy0.epiandroid.utils.NetworkSingleton;
 
-
 public class MessageFragment extends Fragment {
 
-     //TODO API Non Fonctionnel Pb formatage de la response faire a la main ?
-
-    private RecyclerView mRecyclerView;
-    private MessageAdapter mAdapter;
+    private RecyclerView        mRecyclerView;
+    private MessageAdapter      mAdapter;
     private LinearLayoutManager layoutManager;
-    private List<MyObject> cities;
-    private JsonArrayRequest request;
-
-    private void ajouterVilles() {
-        cities = new ArrayList<>();
-        cities.add(new MyObject("France","http://www.telegraph.co.uk/travel/destination/article130148.ece/ALTERNATES/w620/parisguidetower.jpg"));
-        cities.add(new MyObject("Angleterre","http://www.traditours.com/images/Photos%20Angleterre/ForumLondonBridge.jpg"));
-        cities.add(new MyObject("Allemagne","http://tanned-allemagne.com/wp-content/uploads/2012/10/pano_rathaus_1280.jpg"));
-        cities.add(new MyObject("Espagne","http://www.sejour-linguistique-lec.fr/wp-content/uploads/espagne-02.jpg"));
-        cities.add(new MyObject("Italie","http://retouralinnocence.com/wp-content/uploads/2013/05/Hotel-en-Italie-pour-les-Vacances2.jpg"));
-        cities.add(new MyObject("Russie","http://www.choisir-ma-destination.com/uploads/_large_russie-moscou2.jpg"));
-    }
+    private JsonArrayRequest    request;
+    private View                rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.message_fragment, container, false);
+        rootView = inflater.inflate(R.layout.message_fragment, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
         layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
 
         mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
-        //ajouterVilles();
         Bundle args = getActivity().getIntent().getExtras();
         String token = args.getString("token");
 
@@ -83,16 +69,15 @@ public class MessageFragment extends Fragment {
                 error.printStackTrace();
             }
         });
-
         NetworkSingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
         //mAdapter = new MessageAdapter(cities);
         //mAdapter = new MessageAdapter(JSON);
         mRecyclerView.setAdapter(mAdapter);
         return rootView;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
-
 }
