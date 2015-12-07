@@ -22,6 +22,7 @@
         "tokenvalidationcode":"00000000"\n
     </string>
 
+    <string name="antho">Antho :</string>
     <string name="planning">/planning GET \n\n
        "token":"42", \n
         "start":"YYYY-MM-DD", \n

@@ -32,25 +32,25 @@ import epiandroid.alexlevy0.epiandroid.R;
 import epiandroid.alexlevy0.epiandroid.utils.NetworkSingleton;
 
 public class ProjetsFragment extends ListFragment {
-    private JsonObjectRequest request;
+    private JsonObjectRequest   request;
+    private String              token;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         Bundle args = getActivity().getIntent().getExtras();
-        String token = args.getString("token");
+        token = args.getString("token");
 
         makeJsonArrayRequest();
     }
 
     private void makeJsonArrayRequest() {
-
         final JSONArray jsonBody = new JSONArray();
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https").authority(getString(R.string.url_api2))
                 .appendPath("projects")
-                .appendQueryParameter("token", "q90psp6603krffartm2pa6cjb4");
+                .appendQueryParameter("token", token);
 
         JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, builder.build().toString(), jsonBody,
                 new Response.Listener<JSONArray>() {
@@ -60,22 +60,16 @@ public class ProjetsFragment extends ListFragment {
                             final int n = response.length();
                             String[] values = new String[n];
                             for (int i = 0; i < response.length(); i++) {
-                                Log.d("1 ---->", Integer.toString(i));
                                 response.getString(i);
                                 JSONObject projet = new JSONObject(response.get(i).toString());
                                 String PROJET_NAME = projet.getString("project");
-
-                                Log.d("2 ---->", Integer.toString(i));
-                                //TODO SegV sur la liste
                                 if (PROJET_NAME == null)
                                     return;
                                 values[i] = PROJET_NAME;
-                                Log.d("3 ---->", Integer.toString(i));
                             }
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                                     android.R.layout.simple_list_item_1, values);
                             setListAdapter(adapter);
-
                         } catch (JSONException e) {
                             Log.d("JsonArrayRequest ---->", response.toString());
                             e.printStackTrace();

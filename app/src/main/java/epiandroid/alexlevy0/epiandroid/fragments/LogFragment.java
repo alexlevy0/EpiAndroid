@@ -43,19 +43,15 @@ public class LogFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("GOOOOOOOOOOOOOD----->", "GOod");
-                        Log.d("Test %n %s", response.toString());
                         showResponse(response, rootView);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("ERRROR---->", "CALLBACK DERREUR DE LA REQUET");
                 error.printStackTrace();
             }
         });
         NetworkSingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
-
         return rootView;
     }
 
@@ -64,8 +60,6 @@ public class LogFragment extends Fragment {
             final JSONArray logtime = response.getJSONArray("current");
             final int n = logtime.length();
             final JSONObject current = logtime.getJSONObject(n - 1);
-            Log.d("LOG  --->", current.getString("active_log"));
-            Log.d("CM   --->", current.getString("code_module"));
 
             textView = (TextView) rootView.findViewById(R.id.logintime);
             textView.setText("Temps de log pour la semaine : " + current.getString("active_log") + "H");
