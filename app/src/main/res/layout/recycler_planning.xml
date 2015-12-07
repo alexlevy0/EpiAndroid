@@ -1,13 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
     <TextView
         android:layout_height="wrap_content"
-        android:id="@+id/PlanningName"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/PlanningModule"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:id="@+id/PlanningTypeTitle"
+        android:textColor="@color/colorPrimary"
+        />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:id="@+id/PlanningTitle"
         android:layout_width="wrap_content"
         android:padding="10dp"
         android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:id="@+id/PlanningDateBegin"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:id="@+id/PlanningDateEnd"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"/>
+
 
 </LinearLayout>

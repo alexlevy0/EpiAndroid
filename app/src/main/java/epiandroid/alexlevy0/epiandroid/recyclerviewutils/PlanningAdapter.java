@@ -16,9 +16,9 @@ import epiandroid.alexlevy0.epiandroid.R;
  */
 
 public class PlanningAdapter extends RecyclerView.Adapter<PlanningViewHolder> {
-    private JSONObject jsonObject;
+    private JSONArray jsonArray;
 
-    public PlanningAdapter(JSONObject jsonObject) { this.jsonObject = jsonObject; }
+    public PlanningAdapter(JSONArray jsonArray) { this.jsonArray = jsonArray; }
 
     @Override
     public PlanningViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,8 +29,7 @@ public class PlanningAdapter extends RecyclerView.Adapter<PlanningViewHolder> {
     @Override
     public void onBindViewHolder(PlanningViewHolder holder, int position) {
         try {
-            final JSONArray messages = jsonObject.getJSONArray("modules");
-            holder.bind(messages.getJSONObject(position));
+            holder.bind(jsonArray.getJSONObject(position));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -38,13 +37,7 @@ public class PlanningAdapter extends RecyclerView.Adapter<PlanningViewHolder> {
 
     @Override
     public int getItemCount() {
-        try {
-            final JSONArray messages = jsonObject.getJSONArray("modules");
-            return messages.length();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return 0;
+        return jsonArray.length();
     }
 }
 
