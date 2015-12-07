@@ -1,13 +1,8 @@
 package epiandroid.alexlevy0.epiandroid;
 
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
@@ -19,22 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import epiandroid.alexlevy0.epiandroid.fragments.LogFragment;
 import epiandroid.alexlevy0.epiandroid.fragments.MessageFragment;
@@ -198,4 +182,11 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    /*
+    public void onButtonClicked(View v) {
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        DialogFragment newFragment = new PlanningDatePicker();
+        newFragment.show(fragmentManager, "timePicker");
+    } */
 }

@@ -52,7 +52,7 @@ public class MessageFragment extends Fragment {
         final JSONArray jsonBody = new JSONArray();
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https").authority("epitech-api.herokuapp.com")
-                .appendPath("messages").appendQueryParameter("token", "lubtp0i3p67pe9lp1p77bscdm0");
+                .appendPath("messages").appendQueryParameter("token", token);
         request = new JsonArrayRequest(Request.Method.GET, builder.build().toString(), jsonBody,
                 new Response.Listener<JSONArray>() {
                     @Override
