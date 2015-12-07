@@ -33,24 +33,24 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-        String test = "{\n" +
-                "                \"login\": \"levy_b\",\n" +
-                "                \"message\": \"Succès\",\n" +
-                "                \"access_token\": \"lubtp0i3p67pe9lp1p77bscdm0\"\n" +
-                "        }";
-        try {
-            JSONObject object = new JSONObject(test);
-            launchApp(object);
-        } catch (JSONException e) {
-            //TODO
-        }
-
-//
+//        String test = "{\n" +
+//                "                \"login\": \"levy_b\",\n" +
+//                "                \"message\": \"Succès\",\n" +
+//                "                \"access_token\": \"lubtp0i3p67pe9lp1p77bscdm0\"\n" +
+//                "        }";
 //        try {
-//            setLoginView();
-//        } catch (Exception e){
-//            Log.e("SetLoginView ERROR", e.getMessage(), e);
+//            JSONObject object = new JSONObject(test);
+//            launchApp(object);
+//        } catch (JSONException e) {
+//            //TODO
 //        }
+
+
+        try {
+            setLoginView();
+        } catch (Exception e){
+            Log.e("SetLoginView ERROR", e.getMessage(), e);
+        }
     }
 
     private boolean setLoginView() {
